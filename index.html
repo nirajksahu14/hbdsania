@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fff7fb" />
+  <meta name="description" content="A little birthday universe made for Sania's 15th birthday." />
+  <title>For Sania — Happy 15th Birthday 🎀</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Sacramento&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
+    <div class="grain"></div>
+  </div>
+
+  <canvas id="sparkCanvas" aria-hidden="true"></canvas>
+  <div class="floaties" id="floaties" aria-hidden="true"></div>
+  <div class="transition-veil" id="transitionVeil" aria-hidden="true"></div>
+
+  <audio id="birthdaySong" preload="metadata" loop>
+    <source src="https://res.cloudinary.com/vfzaqt3c/video/upload/v1786998324/Ed_Sheeran_-_Perfect.mp3" type="audio/mpeg" />
+  </audio>
+
+  <main id="app">
+    <!-- PASSWORD GATE -->
+    <section class="scene scene-lock active" id="lockScene" aria-labelledby="lockTitle">
+      <div class="lock-card glass-card reveal-in">
+        <div class="cat-welcome" aria-hidden="true">
+          <div class="cat-glow"></div>
+          <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute cat saying hello" />
+          <span class="cat-heart ch1">♡</span><span class="cat-heart ch2">✦</span><span class="cat-heart ch3">🎀</span>
+        </div>
+        <div class="tiny-stars" aria-hidden="true">✦ &nbsp; ♡ &nbsp; ✧</div>
+        <div class="lock-emblem" aria-hidden="true">
+          <span class="emblem-ring"></span>
+          <span class="emblem-heart">♡</span>
+        </div>
+        <p class="eyebrow">a tiny secret for one special girl</p>
+        <h1 id="lockTitle">For <span>Sania</span></h1>
+        <p class="lock-copy">This little birthday universe is protected. Only the birthday code can open it.</p>
+
+        <form class="password-form" id="passwordForm" autocomplete="off">
+          <label class="sr-only" for="passwordInput">Birthday password</label>
+          <div class="input-shell">
+            <input
+              id="passwordInput"
+              name="birthday-password"
+              type="password"
+              inputmode="text"
+              autocomplete="off"
+              spellcheck="false"
+              autocapitalize="none"
+              placeholder="Enter the secret code"
+              aria-describedby="passwordHint passwordError"
+            />
+            <button type="button" class="peek-btn" id="peekPassword" aria-label="Show password">♡</button>
+          </div>
+          <p class="password-hint" id="passwordHint">Hint: day + month 🎀</p>
+          <p class="password-error" id="passwordError" role="status"></p>
+          <button class="primary-btn unlock-btn" type="submit">
+            <span>Open her birthday world</span>
+            <span aria-hidden="true">✦</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- LIGHTS ON -->
+    <section class="scene scene-lights" id="lightsScene" aria-labelledby="lightsTitle">
+      <div class="lights-world" id="lightsWorld">
+        <div class="night-stars" aria-hidden="true"></div>
+        <div class="hanging-lamp" aria-hidden="true">
+          <span class="lamp-cord"></span>
+          <span class="lamp-shade"></span>
+          <span class="lamp-bulb"></span>
+          <span class="lamp-glow"></span>
+        </div>
+        <div class="lights-card glass-card">
+          <p class="eyebrow">first, a tiny bit of magic</p>
+          <h2 id="lightsTitle">It is a little dark in here…</h2>
+          <p class="scene-copy" id="lightsCopy">Tap the switch and turn on Sania’s birthday lights. ✨</p>
+          <button class="light-switch" id="lightSwitch" type="button" aria-pressed="false">
+            <span class="switch-track"><span class="switch-knob">☾</span></span>
+            <span class="switch-label">lights off</span>
+          </button>
+          <button class="primary-btn lights-next" id="lightsNextBtn" type="button">Make a birthday wish ♡</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CANDLE MOMENT -->
+    <section class="scene scene-cake" id="cakeScene" aria-labelledby="cakeTitle">
+      <div class="cake-card glass-card">
+        <div class="chapter-chip">chapter 01 · make a wish</div>
+        <p class="eyebrow">before the memories begin</p>
+        <h2 id="cakeTitle">Fifteen looks <em>beautiful</em> on you.</h2>
+        <p class="scene-copy wish-copy">Close your eyes for a second. Think of the one thing your heart really wants, make the happiest little wish… and when you are ready, blow the candles out. 🤍</p>
+
+        <div class="cake-stage" id="cakeStage">
+          <div class="halo halo-back"></div>
+          <div class="cake-sparkles" aria-hidden="true">
+            <i>✦</i><i>♡</i><i>✧</i><i>⋆</i><i>♡</i><i>✦</i>
+          </div>
+
+          <div class="candles" id="candles" aria-hidden="true">
+            <div class="candle"><span class="flame"></span><span class="wick"></span></div>
+            <div class="candle"><span class="flame"></span><span class="wick"></span></div>
+            <div class="candle"><span class="flame"></span><span class="wick"></span></div>
+            <div class="candle"><span class="flame"></span><span class="wick"></span></div>
+            <div class="candle"><span class="flame"></span><span class="wick"></span></div>
+          </div>
+
+          <div class="cake" aria-hidden="true">
+            <div class="cake-top">
+              <span class="berry berry-a"></span>
+              <span class="berry berry-b"></span>
+              <span class="berry berry-c"></span>
+              <span class="cream-swirl swirl-a"></span>
+              <span class="cream-swirl swirl-b"></span>
+              <span class="cream-swirl swirl-c"></span>
+            </div>
+            <div class="cake-tier tier-top"><span class="drip d1"></span><span class="drip d2"></span><span class="drip d3"></span></div>
+            <div class="cake-tier tier-mid"></div>
+            <div class="cake-tier tier-bottom"></div>
+            <div class="cake-plate"></div>
+          </div>
+          <div class="smoke-layer" id="smokeLayer" aria-hidden="true"></div>
+        </div>
+
+        <div class="wish-prompt" id="wishPrompt"><span>🙈</span> eyes closed? &nbsp; <span>✨</span> wish made?</div>
+        <div class="cake-actions single-action">
+          <button class="primary-btn" id="blowCandlesBtn" type="button">I made my wish — blow the candles ♡</button>
+        </div>
+        <p class="soft-note" id="cakeNote">Your song begins only after the candles go out. 🤍</p>
+      </div>
+    </section>
+
+    <!-- CINEMATIC LOADER -->
+    <section class="scene scene-loader" id="loaderScene" aria-labelledby="loaderTitle">
+      <div class="loader-card glass-card">
+        <div class="loader-constellation" aria-hidden="true">
+          <span class="big-heart">♡</span>
+          <span class="spin-star s1">✦</span>
+          <span class="spin-star s2">✧</span>
+          <span class="spin-star s3">⋆</span>
+        </div>
+        <p class="eyebrow">gathering tiny pieces of happiness</p>
+        <h2 id="loaderTitle">Loading <em>Sania’s little universe</em>…</h2>
+        <p class="scene-copy" id="loaderText">Collecting smiles, memories, videos, stardust and a suspicious amount of pink.</p>
+
+        <div class="progress-shell" aria-label="Loading memories">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-meta">
+            <span id="progressLabel">0%</span>
+            <span id="progressStatus">warming up the stars</span>
+          </div>
+        </div>
+
+        <div class="loader-pills" aria-hidden="true">
+          <span>♡ smiles</span><span>✦ memories</span><span>🎀 softness</span><span>⋆ magic</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMORY EXPERIENCE -->
+    <section class="scene scene-memory" id="memoryScene" aria-labelledby="memoryTitle">
+      <nav class="story-nav glass-mini" aria-label="Birthday story progress">
+        <button class="brand-dot" id="storyHomeBtn" aria-label="Back to the beginning of memories">S</button>
+        <div class="story-progress"><span id="storyProgress"></span></div>
+        <button class="music-toggle" id="musicToggle" type="button" aria-label="Toggle background music">♫</button>
+      </nav>
+
+      <header class="memory-hero section-block">
+        <div class="hero-ribbon">13 · 10 · a very special day</div>
+        <p class="eyebrow">chapter 02 · the memory garden</p>
+        <h1 id="memoryTitle">Happy 15th Birthday,<br /><span>my cutie.</span></h1>
+        <p class="hero-copy">A tiny scroll through moments that deserve to stay a little longer.</p>
+        <div class="scroll-cue" aria-hidden="true"><span></span> scroll softly</div>
+      </header>
+
+      <section class="section-block memory-collage" aria-label="Photo memories">
+        <div class="section-heading left-align">
+          <p class="eyebrow">some smiles are worth keeping forever</p>
+          <h2>Little pieces of <em>you</em></h2>
+        </div>
+
+        <div class="collage-grid">
+          <figure class="memory-card portrait tilt-left reveal-scroll sequence-reveal" data-depth="0.04">
+            <div class="tape tape-pink"></div>
+            <img src="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.07_1.jpg" alt="A birthday memory of Sania" loading="eager" />
+            <figcaption>the kind of smile that makes a day softer ♡</figcaption>
+          </figure>
+
+          <figure class="memory-card square tilt-right reveal-scroll sequence-reveal" data-depth="-0.03">
+            <div class="stamp">15</div>
+            <img src="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.07_2.jpg" alt="A happy memory of Sania" loading="eager" />
+            <figcaption>pretty moments, prettier person ✦</figcaption>
+          </figure>
+
+          <div class="quote-tile reveal-scroll sequence-reveal">
+            <span class="quote-mark">“</span>
+            <p>May fifteen be gentle, bright, silly, brave and full of reasons to smile.</p>
+            <span class="tiny-sign">for Sania, always 🎀</span>
+          </div>
+
+          <figure class="memory-card tall tilt-soft reveal-scroll sequence-reveal" data-depth="0.02">
+            <div class="tape tape-lilac"></div>
+            <img src="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.09_1.jpg" alt="A lovely portrait memory of Sania" loading="lazy" />
+            <figcaption>main character energy, but make it adorable ✧</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section-block film-section" aria-label="Video memories">
+        <div class="section-heading centered">
+          <p class="eyebrow">press play on the good bits</p>
+          <h2>Memories that <em>move</em></h2>
+          <p class="section-copy">The clips play muted so the birthday song can stay softly in the background.</p>
+        </div>
+
+        <div class="film-grid">
+          <article class="video-card reveal-scroll sequence-reveal">
+            <div class="film-hole-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="video-shell">
+              <video muted playsinline loop preload="metadata" poster="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.07.jpg">
+                <source src="https://res.cloudinary.com/vfzaqt3c/video/upload/v1786998049/WhatsApp_Video_2026-08-18_at_01.49.08_1.mp4" type="video/mp4" />
+              </video>
+              <button class="video-play" type="button" aria-label="Play or pause video">▶</button>
+            </div>
+            <div class="video-caption"><span>01</span><p>a tiny moment, saved forever</p></div>
+          </article>
+
+          <article class="video-card feature reveal-scroll sequence-reveal">
+            <div class="film-hole-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="video-shell">
+              <video muted playsinline loop preload="metadata" poster="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.08.jpg">
+                <source src="https://res.cloudinary.com/vfzaqt3c/video/upload/v1786998049/WhatsApp_Video_2026-08-18_at_01.49.08.mp4" type="video/mp4" />
+              </video>
+              <button class="video-play" type="button" aria-label="Play or pause video">▶</button>
+            </div>
+            <div class="video-caption"><span>02</span><p>because photos sometimes need a heartbeat</p></div>
+          </article>
+
+          <article class="video-card reveal-scroll sequence-reveal">
+            <div class="film-hole-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="video-shell">
+              <video muted playsinline loop preload="metadata" poster="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.09.jpg">
+                <source src="https://res.cloudinary.com/vfzaqt3c/video/upload/v1786998049/WhatsApp_Video_2026-08-18_at_01.49.09.mp4" type="video/mp4" />
+              </video>
+              <button class="video-play" type="button" aria-label="Play or pause video">▶</button>
+            </div>
+            <div class="video-caption"><span>03</span><p>one more for the birthday time capsule</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block postcard-section" aria-label="More photo memories">
+        <div class="postcard-grid">
+          <div class="postcard-copy reveal-scroll">
+            <p class="eyebrow">just a few more before the letter</p>
+            <h2>Keep these <em>close.</em></h2>
+            <p>Some memories do not need a big caption. They just need a little space to exist, shine, and remind you that life has already given you beautiful moments—and many more are waiting.</p>
+            <div class="mini-badges"><span>♡ loved</span><span>✦ cherished</span><span>🎀 celebrated</span></div>
+          </div>
+
+          <figure class="postcard reveal-scroll sequence-reveal">
+            <img src="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.07.jpg" alt="A special memory of Sania" loading="lazy" />
+            <figcaption>October girl energy 🍂🎀</figcaption>
+          </figure>
+
+          <figure class="postcard offset reveal-scroll sequence-reveal">
+            <img src="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.08.jpg" alt="Another special memory of Sania" loading="lazy" />
+            <figcaption>soft heart, bright future ✦</figcaption>
+          </figure>
+
+          <figure class="postcard wide reveal-scroll sequence-reveal">
+            <img src="https://res.cloudinary.com/vfzaqt3c/image/upload/v1786998048/WhatsApp_Image_2026-08-18_at_01.49.09.jpg" alt="A final photo memory of Sania" loading="lazy" />
+            <figcaption>fifteen chapters in—and the loveliest ones are still ahead ♡</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- FINAL ENVELOPE -->
+      <section class="section-block letter-section" id="letterSection" aria-labelledby="letterTitle">
+        <div class="letter-intro reveal-scroll">
+          <p class="eyebrow">chapter 03 · one last thing</p>
+          <h2 id="letterTitle">A little letter,<br /><em>just for you.</em></h2>
+          <p>Tap the sealed envelope when you are ready. It will softly fade away and become your letter. 💌</p>
+        </div>
+
+        <div class="envelope-stage reveal-scroll" id="envelopeStage">
+          <button class="envelope" id="envelope" type="button" aria-expanded="false" aria-label="Open birthday letter">
+            <div class="env-back"></div>
+            <div class="env-flap"></div>
+            <div class="env-left"></div>
+            <div class="env-right"></div>
+            <div class="env-bottom"></div>
+            <div class="wax-seal" aria-hidden="true"><span>♡</span></div>
+          </button>
+          <p class="tap-note" id="tapNote">tap the seal to read your letter 💌</p>
+
+          <div class="letter-takeover" id="letterTakeover" aria-hidden="true">
+            <div class="letter-ambient" aria-hidden="true">
+              <span>♡</span><span>✦</span><span>✧</span><span>♡</span><span>⋆</span><span>✦</span>
+            </div>
+            <button class="skip-letter-btn" id="skipLetterBtn" type="button" aria-label="Skip the letter animation">
+              Skip animation <span aria-hidden="true">→</span>
+            </button>
+
+            <div class="paper-wrap" id="paperWrap">
+              <article class="letter-paper fullscreen-paper" id="letterPaper" tabindex="-1" aria-label="Birthday letter for Sania">
+                <div class="paper-ribbon">for Sania · 13 October</div>
+                <div class="paper-doodle doodle-one" aria-hidden="true">♡</div>
+                <div class="paper-doodle doodle-two" aria-hidden="true">✦</div>
+                <div class="letter-scroll" id="letterScroll" aria-live="polite">
+                  <span class="letter-title" id="letterTypedTitle"></span>
+                  <span class="letter-body-type" id="letterTypedBody"></span><span class="type-caret" id="typeCaret" aria-hidden="true"></span>
+                </div>
+                <div class="paper-signoff" aria-hidden="true">with love ♡</div>
+              </article>
+            </div>
+
+            <button class="primary-btn final-reveal-btn" id="finalRevealBtn" type="button">One last click, birthday girl ✨</button>
+          </div>
+        </div>
+
+        <div class="end-mark" id="endMark" aria-hidden="true">
+          <span>✦</span>
+          <p>made with a ridiculous amount of love & stardust for Sania</p>
+          <span>♡</span>
+        </div>
+      </section>
+    </section>
+
+    <!-- FINAL BIRTHDAY REVEAL -->
+    <section class="scene scene-final" id="finalScene" aria-labelledby="finalTitle">
+      <div class="final-stars" aria-hidden="true">✦ ♡ ✧ ⋆ 🎀 ✦ ♡</div>
+      <div class="final-content">
+        <p class="eyebrow">and just in case it was not obvious enough…</p>
+        <div class="final-number">15</div>
+        <h1 id="finalTitle">Happy 15th Birthday,<br><span>Sania!</span></h1>
+        <p>May this year be as lovely, bright and full of magic as you deserve. 🤍🎀</p>
+        <div class="final-heart" aria-hidden="true">♡</div>
+      </div>
+      <div class="confetti-rain" id="confettiRain" aria-hidden="true"></div>
+      <footer class="arthouse-taskbar">
+        <span>made with love by</span>
+        <a href="https://projectarthouse.com" target="_blank" rel="noopener noreferrer">projectarthouse.com</a>
+        <span class="taskbar-dot">♡</span>
+        <a class="instagram-link" href="https://www.instagram.com/project.arthouse/" target="_blank" rel="noopener noreferrer" aria-label="Project Arthouse on Instagram">Instagram ↗</a>
+      </footer>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
